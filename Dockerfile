@@ -4,7 +4,7 @@ FROM centos:7
 RUN yum -y install epel-release \
     http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
     yum-utils && \
-    yum-config-manager --enable remi-php72
+    yum-config-manager --enable remi-php74
 
 RUN yum update -y && yum upgrade -y && yum install -y initscripts \
     wget \
@@ -80,13 +80,13 @@ RUN yum install -y php-intl \
     php-ftp \
     php-xdebug \
     php-mcrypt \
-    php-mbstring \
+    php74-php-mbstring \
     php-soap \
     php-gmp \
     php-pdo_odbc \
     php-dom \
     php-pdo \
-    php-zip \
+    php74-php-zip \
     php-mysqli \
     php-bcmath \
     php-gd \
