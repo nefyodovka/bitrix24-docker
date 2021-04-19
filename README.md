@@ -35,7 +35,7 @@ Bitrix24 Docker предоставляет готовую виртуальную
 version: '3'
 services:
   web:
-    image: "akopkesheshyan/bitrix24:latest"
+    image: "nefyodovka/bitrix24:latest"
     ports:
       - "80:80"
       - "443:443"
