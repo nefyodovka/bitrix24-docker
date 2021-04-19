@@ -45,7 +45,8 @@ services:
       - seccomp:unconfined
     privileged: true
     volumes:
-      - ./:/home/bitrix/www/local
+      - ./local:/home/bitrix/www/local
+      - data-bitrix:/home/bitrix/www/bitrix
     depends_on:
       - mysql
   mysql:
@@ -62,7 +63,24 @@ services:
       MYSQL_DATABASE: sitemanager
       MYSQL_USER: bitrix
       MYSQL_PASSWORD: +Tr+()8]!szl[HQIsoT5
-    command: ['--character-set-server=utf8', '--collation-server=utf8_unicode_ci', '--skip-character-set-client-handshake', '--sql-mode=']   
+    command: ['--character-set-server=utf8', '--collation-server=utf8_unicode_ci', '--skip-character-set-client-handshake', '--sql-mode=']  
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql:mysql
+    ports:
+      - 8181:80
+    environment:
+      PMA_HOST: mysql
+      MYSQL_USERNAME: bitrix
+      MYSQL_PASSWORD: +Tr+()8]!szl[HQIsoT5
+volumes:
+  data-bitrix:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: bitrix
 ```
 
 Bitrix24 Docker включает в себя первичные файлы установки, поэтому после старта контейнеров, вы сразу увидите страницу установки свежей копии портала по адресу http://localhost. 
