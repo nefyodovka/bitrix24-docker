@@ -1,12 +1,18 @@
 FROM centos:7
 
+
 # Add basics first
 RUN yum -y install epel-release \
-    http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
+    https://rpms.remirepo.net/enterprise/remi-release-7.rpm \
     yum-utils && \
     yum-config-manager --enable remi-php74
 
-RUN yum update -y && yum upgrade -y && yum install -y initscripts \
+RUN rpmkeys --import file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 && \
+    yum -y update && \
+    yum clean all
+
+RUN yum upgrade -y && yum install -y deltarpm \
+    initscripts \
     wget \
     httpd \
     curl \
@@ -58,7 +64,7 @@ RUN wget http://nginx.org/download/nginx-1.14.0.tar.gz && tar xzvf nginx-1.14.0.
     && make \
     && make install
 
-RUN ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+RUN ln -fs /usr/share/zoneinfo/Asia/Almaty /etc/localtime
 
 RUN useradd -ms /bin/bash bitrix
 
@@ -80,13 +86,13 @@ RUN yum install -y php-intl \
     php-ftp \
     php-xdebug \
     php-mcrypt \
-    php74-php-mbstring \
+    php-mbstring \
     php-soap \
     php-gmp \
     php-pdo_odbc \
     php-dom \
     php-pdo \
-    php74-php-zip \
+    php-zip \
     php-mysqli \
     php-bcmath \
     php-gd \
