@@ -121,6 +121,12 @@ RUN rm -rf /var/cache/yum/*
 COPY ./etc /etc
 COPY ./usr /usr
 
+WORKDIR /etc/nginx/bx/site_enabled
+
+RUN ln /etc/nginx/bx/site_avaliable/push.conf /etc/nginx/bx/site_enabled/
+RUN ln /etc/nginx/bx/site_avaliable/s1.conf /etc/nginx/bx/site_enabled/
+RUN ln /etc/nginx/bx/site_avaliable/ssl.s1.conf /etc/nginx/bx/site_enabled/
+
 WORKDIR /home/bitrix/www
 
 COPY ./www /home/bitrix/www
